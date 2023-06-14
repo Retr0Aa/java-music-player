@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -12,6 +14,14 @@ import javax.swing.*;
 import javax.swing.event.MouseInputAdapter;
 import javax.swing.table.DefaultTableModel;
 
+import org.apache.tika.metadata.Metadata;
+import org.apache.tika.parser.AutoDetectParser;
+import org.apache.tika.parser.ParseContext;
+import org.apache.tika.parser.Parser;
+import org.apache.tika.sax.BodyContentHandler;
+
+import javazoom.jl.decoder.Bitstream;
+import javazoom.jl.decoder.Header;
 import javazoom.jl.decoder.JavaLayerException;
 import retroa.MusicPlayer.player.MusicPlayer;
 import retroa.MusicPlayer.player.SongFileInfo;
@@ -43,8 +53,25 @@ public class MediaPlayerGUI extends JFrame implements ActionListener {
             for (File file : files) {
                 if (file.isFile()) {
                 	if (file.getName().endsWith(".mp3")) {
-                		
-                		songFileInfos.add(new SongFileInfo("You Know How We Do It", "Lethal Injection", "Ice Cube", "Rap", file.getPath()));
+                		try (FileInputStream inputStream = new FileInputStream(file)) {
+                            Parser parser = new AutoDetectParser();
+                            BodyContentHandler handler = new BodyContentHandler();
+                            Metadata metadata = new Metadata();
+                            ParseContext context = new ParseContext();
+
+                            parser.parse(inputStream, handler, metadata, context);
+
+                            String songName = metadata.get("dc:title");
+                            String artist = metadata.get("xmpDM:artist");
+                            String album = metadata.get("xmpDM:album");
+                            String genre = metadata.get("xmpDM:genre");
+                            
+                            songFileInfos.add(new SongFileInfo(songName, album, artist, genre, file.getPath()));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                 	}
                 }
             }
