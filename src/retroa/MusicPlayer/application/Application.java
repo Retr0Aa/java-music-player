@@ -9,6 +9,7 @@ import javax.swing.JFileChooser;
 
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
+import retroa.MusicPlayer.gui.MediaPlayerGUI;
 import retroa.MusicPlayer.player.MusicPlayer;
 
 public class Application {
@@ -16,8 +17,12 @@ public class Application {
 	public static void main(String[] args) { new Application(); }
 	
 	Application() {
-		MusicPlayer musicPlayer = new MusicPlayer();
+		System.setProperty("apple.laf.useScreenMenuBar", "true");
 		
-		musicPlayer.playSong("/Users/alexander/Music/Music/MyMusic/Ice Cube - You Know How We Do It (Official Music Video).mp3");
+		MusicPlayer musicPlayer = new MusicPlayer();
+		MediaPlayerGUI mpg = new MediaPlayerGUI(musicPlayer);
+		
+		mpg.loadGUI();
+		mpg.setupJFrameProperties(400, 700, "Retr0A's Media Player");
 	}
 }
