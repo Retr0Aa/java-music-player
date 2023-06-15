@@ -33,12 +33,10 @@ public class MusicPlayer {
     public MusicPlayer() {
     }
 
-    public void SetSongFilePath(String filePath) {
+    public void setSongFilePath(String filePath) {
     	try {
 			this.player = new Player(new FileInputStream(filePath));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (JavaLayerException e) {
+		} catch (FileNotFoundException | JavaLayerException e) {
 			e.printStackTrace();
 		}
     }
@@ -49,7 +47,7 @@ public class MusicPlayer {
     public void play() throws JavaLayerException {
         synchronized (playerLock) {
             switch (playerStatus) {
-                case NOTSTARTED:
+                case NOTSTARTED -> {
                     final Runnable r = new Runnable() {
                         public void run() {
                             playInternal();
@@ -60,15 +58,11 @@ public class MusicPlayer {
                     t.setPriority(Thread.MAX_PRIORITY);
                     playerStatus = PLAYING;
                     t.start();
-                    
                     isSongPlaying = true;
-                    
-                    break;
-                case PAUSED:
-                    resume();
-                    break;
-                default:
-                    break;
+                }
+                case PAUSED -> resume();
+                default -> {
+                }
             }
         }
     }
