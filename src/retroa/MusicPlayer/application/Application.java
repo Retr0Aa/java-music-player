@@ -5,7 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-import javax.swing.JFileChooser;
+import javax.swing.*;
 
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
