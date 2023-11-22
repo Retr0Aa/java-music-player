@@ -1,0 +1,12 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="MusicPlayer:jar">
+    <output-path>$PROJECT_DIR$/classes/artifacts/MusicPlayer_jar</output-path>
+    <root id="archive" name="MusicPlayer.jar">
+      <element id="module-output" name="MusicPlayer" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/tika-app-2.9.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/jlayer-1.0.1.jar" path-in-jar="/" />
+      <element id="library" level="module" name="tika-app-2.8.0.jar" module-name="MusicPlayer" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/json-simple-1.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

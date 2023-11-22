@@ -134,7 +134,6 @@ public class MediaPlayerGUI extends JFrame implements ActionListener {
 
 		playlistsTree.setModel(new DefaultTreeModel(getPlaylistsTreeRoot()));
 
-		// Create toolbar components
 		JMenu fileMenu = new JMenu("File");
 		JMenuItem setMusicFolderMenuItem = new JMenuItem("Set Music Folder");
 
@@ -264,7 +263,7 @@ public class MediaPlayerGUI extends JFrame implements ActionListener {
 		controlsPanel.add(playPauseButton, BorderLayout.CENTER);
 		controlsPanel.add(stopSongButton, BorderLayout.SOUTH);
 
-		musicPanel.add(searchTextField, BorderLayout.NORTH);
+		//musicPanel.add(searchTextField, BorderLayout.NORTH);
 		musicPanel.add(musicFoundTable, BorderLayout.CENTER);
 
 		JTabbedPane tabbedPane = new JTabbedPane();
